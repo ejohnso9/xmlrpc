@@ -4,11 +4,20 @@
 Testing new GitHub tools, and trying to get up to speed with git...
 
 
-I am new to iOS, as well as fairly new to XMLRPC.
+I am new to iOS, as well as git, XMLRPC, and markdown. 
 
-My intention is to provide some useful documentation, as much for my own
-benefit to refer back to as well as for other beginner's to get up and
-productive using XMLRPC from an iOS environment.
+I didn't really find the sort of documentation I was hoping for with
+this project, so as I go through the learning process, I hope to
+contribute some of my discoveries; partially for my own reference, as
+well as in the hope they will be useful to other beginner's in my own
+boat.
+
+The first will be a HelloWorld tutorial: a step-by-step intoduction to
+getting XMLRPC installed, creating a simple client program in XCode for
+iOS, and making that first call to the sample server and getting your
+string echoed and returned.
 
 Hopefully, eventually I will be able to make some meaningful and useful
-contributions to Eric's codebase as well.
+contributions to the codebase as well.
+
+-ej
