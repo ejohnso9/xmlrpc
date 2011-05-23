@@ -1,0 +1,14 @@
+
+2011.MAY.23 EPJ
+
+Testing new GitHub tools, and trying to get up to speed with git...
+
+
+I am new to iOS, as well as fairly new to XMLRPC.
+
+My intention is to provide some useful documentation, as much for my own
+benefit to refer back to as well as for other beginner's to get up and
+productive using XMLRPC from an iOS environment.
+
+Hopefully, eventually I will be able to make some meaningful and useful
+contributions to Eric's codebase as well.
