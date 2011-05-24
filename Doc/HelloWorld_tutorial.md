@@ -1,24 +1,30 @@
+HelloWorld_tutorial.md
+2011.MAY.24
+Author: Erik Johnson
+
 This document is natively in the markdown language. If you are not
-seeing rendered HTML, you can check out:
+seeing rendered HTML, check out:
     http://daringfireball.net/projects/markdown/
 
-I didn't find this sort of document I had hoped for with this project,
+I didn't find the sort of document I had hoped for with this project,
 so I'll try to provide it.
 
 # Hello, World!
 
 This document is a beginner's step-by-step guide to getting up to speed
-with Eric Czarny's XMLRPC for MacOS/iOS. 
+with Eric Czarny's XMLRPC code for MacOS/iOS. 
 
 I think XMLRPC is actually a lot easier to use than you might think by
-opening the Tools/Sample Client project and trying to understand it, so
+opening the Tools/Sample Client project and trying to trace what is
+going on there and figure out what the minimum installation is, so
 this document will walk you through the first steps of making a remote
-call via XMLRPC.
+call via E. Czarny's XMLRPC.
 
 ## 0. Pre-requisites
 
-I'm not assuming much about your knowledge, but there are a few tools
-you will need:
+I'm not assuming much about your knowledge of XMLRPC, iOS, or Objective
+C, but there are a few tools you will need in order to complete this
+tutorial:
 
 1. Apple's Xcode IDE
 
@@ -31,9 +37,17 @@ you will need:
 
 3. `ant`
 
-    You probably already have this. You can check with:
+    Since this library is for MacOS/iOS, I'm guessing you are probably
+    using a MAC, and you probably already have `ant` installed for you
+    at `/usr/bin/ant'. You can verify this with the command:
 
         which ant
+
+    If, in fact, you do not have `ant`, then you need to solve this
+    prerequisite (which is beyond the scope of this document). 
+    The `ant` home page can be found here:
+    [The Apache ANT Project](http://ant.apache.org/)
+
 
 With those in place, we have everything we need to get going.
 Let's jump into XMLRPC...
@@ -51,28 +65,32 @@ the distribution to be:
 
 This should create the `xmlrpc/` directory locally. 
 
+The tool is marked optional above because you might have another form
+of distribution such as a `tar` or `zip` file, in which case you only
+need to unpack the distribution and recover the `xmlrpc/` directory.
+
 ## 2. Create a new XCode project and bring in the XMLRPC code.
 
 1. Launch the XCode application
 
-1. Select "Create a new Xcode project"
+2. Select "Create a new Xcode project"
 
-1. Under "iOS", select "View-based Application" and click "Choose..."
+3. Under "iOS", select "View-based Application" and click "Choose..."
 
-1. Tell XCode what to name your project and where to put it.  I suggest
+4. Tell XCode what to name your project and where to put it.  I suggest
 `SimpleXMLRPCClient` for the project name and will refer to files by
 this name. You can store the project under your home directory.
 
-1. Create a new group.
+5. Create a new group.
 
     Eric is distributing XMLRPC as a library, but I was unable to get
-    the library properly linked in. I'm going to show you a simple way
-    to just pull his source into the project directly. 
+    the library properly linked. I'm going to show you a simple way
+    to just pull the source code directly into the project. 
 
     Right-click on the top tree node under "Groups & Filter", select 
     Add -> "New Group".  Name the new group (folder) "XMLRPC".
 
-1. Bring the XMLRPC source into the project.
+6. Bring the XMLRPC source into the project.
 
     Right-click on your new group icon and select Add -> "Existing
     Files..." 
@@ -118,14 +136,14 @@ basic communication with the server.
         #import "XMLRPCRequest.h"
 
 
-1. Add code in `SimpleXMLRPCClient.h`
+2. Add code in `SimpleXMLRPCClient.h`
 
     At the top of your app delegate header file, add the following line
     right under the existing `UIKit` import:
 
         #import "XMLRPC.h"
 
-1. Create a function to make an XMLRPC call.
+3. Create a function to make an XMLRPC call.
 
     Switch to `SimpleXMLRPCClientAppDelegate.m`, and add the following
     method below the definition of
@@ -149,20 +167,20 @@ basic communication with the server.
         }
 
 
-1. Insert a call to our new method.
+4. Insert a call to our new method.
 
     Just before the return statement at the end of
     `application:didFinishLaunchingWithOptions:`, add the following call:
 
         [self makeRemoteCall];
 
-    That's really all there is to the calling side.
+    That's really all there is to making an XMLRPC request. The next few
+    steps add the infrastructure to be able to receive the XMLRPC
+    response.
 
-    Now, we need to make three changes to the `*AppDelegate.h` file:
+5.  Declare ourselves as an `XMLRPCConnectionDelegate`.  
 
-1.  Declare ourselves as an `XMLRPCConnectionDelegate`.  
-
-    Did you this call (above? 
+    Did you notice this call (above)? 
     
         [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
         
@@ -175,14 +193,14 @@ basic communication with the server.
 
         @interface SimpleXMLRPCClientAppDelegate : NSObject <UIApplicationDelegate, XMLRPCConnectionDelegate> {
 
-1. Add a declaration for our custom function
+6. Add a declaration for our custom function
 
     Right above the `@property` lines in `SimpleXMLRPCClient.h`, add a
     declaration for our custom function:
 
         - (void)makeRemoteCall;
 
-1. Implement the callback interface.
+7. Implement the callback interface.
 
     Switch back to `SimpleXMLRPCClientAppDelegate.m` and add the
     following code to implement the rest of be protocol methods:
@@ -224,40 +242,47 @@ basic communication with the server.
 
         #pragma mark -
 
-1. Check the build
+8. Check the build
 
     OK, at this point we've added everything we need to run a sample
-    client. Build (but don't run) you client to make sure everything is
-    clean.  (CMD-Shift-B, CMD-B)
+    client. Build (but don't yet run) your client to make sure
+    we have a clean build.  (CMD-Shift-B, CMD-B)
 
-    If you don't have a clean build, fix any errors or review the
-    document and redo steps until you get a clean build.
+    If not, fix any errors or review the document and redo steps until
+    you get a clean build.
 
-1. Build the sample server
+9. Build the sample server
 
     Eric Czarny has included a complete test server written in Java with
-    the XMLRPC distribution.  I think that's awesome, and building and
-    running it is a snap. From the directory above where you downloaded
-    the XMLRPC distribution, execute the following two commands to build
-    and build and launch the server:
+    the XMLRPC distribution.  I think that is imply awesome, and
+    building and running it is a snap! From the directory where you
+    downloaded the XMLRPC distribution, execute the following two
+    commands to build and launch the server:
 
-        cd "xmlrpc/Tools/Test Server"
+        cd "Tools/Test Server"
         ant
 
-    You should see some output at the command line, and then be
-    presented with a window titled "Control Panel" that has a very
-    simple interface. 
+    (Note that the argument to `cd` is double-quoted here because of the
+    space in the name of the directory.) You should see some output at
+    the command line, and then be presented with a window titled
+    "Control Panel" that has a very simple interface. That's the sample
+    server, up and running. Awesome.
 
     Click the "Start" button, and we're ready to go!
     
-1. Run your application
+10. Run your application
 
     Go back to Xcode, and run your application. The final line of output
-    should be:
+    should read something like:
+
+        2011-05-24 15:28:24.201 SimpleXMLRPCClient[754:207] Received: "Hello, World!" from the server!
+        
     
-1. Congratulations. Welcome to XMLRPC.
+11. Congratulations. Welcome to XMLRPC.
 
     That's not a very exciting application, but it is a real, genuine
-    XMLRPC call. Other tutorials talk about putting XMLRPC to work in
+    XMLRPC call. 
+    
+    Other tutorials talk about putting XMLRPC to work in
     a more realistic environment.
 
