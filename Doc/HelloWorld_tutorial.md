@@ -39,7 +39,7 @@ tutorial:
 
     Since this library is for MacOS/iOS, I'm guessing you are probably
     using a MAC, and you probably already have `ant` installed for you
-    at `/usr/bin/ant'. You can verify this with the command:
+    at `/usr/bin/ant`. You can verify this with the command:
 
         which ant
 
@@ -53,6 +53,10 @@ With those in place, we have everything we need to get going.
 Let's jump into XMLRPC...
 
 ## 1. Get (or git)  the source distribution
+
+(If you found this file as part of the XMLRPC distrubution, then
+presumably step 1 had already been accomplished. Proceed directly to
+step 2.)
 
 Probably the best way to do this is to simply clone the GitHub repository
 using a `git` client.  
@@ -203,7 +207,7 @@ basic communication with the server.
 7. Implement the callback interface.
 
     Switch back to `SimpleXMLRPCClientAppDelegate.m` and add the
-    following code to implement the rest of be protocol methods:
+    following code to implement the rest of the protocol methods:
 
         #pragma mark -
         #pragma mark XMLRPCConnectionDelegate
@@ -223,7 +227,7 @@ basic communication with the server.
         }
 
         - (void)request:(XMLRPCRequest *)request 
-        didFailWithError: (NSError *)error
+        didFailWithError:(NSError *)error
         { }
 
         - (BOOL)request:(XMLRPCRequest *)request 
@@ -254,7 +258,7 @@ basic communication with the server.
 9. Build the sample server
 
     Eric Czarny has included a complete test server written in Java with
-    the XMLRPC distribution.  I think that is imply awesome, and
+    the XMLRPC distribution.  I think that is simply awesome, and
     building and running it is a snap! From the directory where you
     downloaded the XMLRPC distribution, execute the following two
     commands to build and launch the server:
@@ -272,17 +276,13 @@ basic communication with the server.
     
 10. Run your application
 
-    Go back to Xcode, and run your application. The final line of output
-    should read something like:
+    Go back to Xcode, and run your application (CMD-Shift-B, CMD-Enter). 
+    The final line of output should read something like:
 
         2011-05-24 15:28:24.201 SimpleXMLRPCClient[754:207] Received: "Hello, World!" from the server!
-        
     
-11. Congratulations. Welcome to XMLRPC.
+11. Congratulations! Welcome to XMLRPC.
 
     That's not a very exciting application, but it is a real, genuine
-    XMLRPC call. 
-    
-    Other tutorials talk about putting XMLRPC to work in
-    a more realistic environment.
-
+    XMLRPC call, and you are up to the starting line of putting XMLRPC
+    to work for you.
