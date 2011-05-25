@@ -63,9 +63,10 @@
         myDelegate = [delegate retain];
         
         if (myConnection) {
-            NSLog(@"The connection, %@, has been established!", myIdentifier);
+            // NSLog(@"The connection, %@, has been established!", myIdentifier);
         } else {
-            NSLog(@"The connection, %@, could not be established!", myIdentifier);
+            NSLog(@"%s Line %d: ERROR: The connection, %@, could not be established!", 
+                __PRETTY_FUNCTION__, __LINE__, myIdentifier);
             
             [self release];
             
@@ -148,7 +149,8 @@
 - (void)connection: (NSURLConnection *)connection didFailWithError: (NSError *)error {
     XMLRPCRequest *request = [[myRequest retain] autorelease];
     
-    NSLog(@"The connection, %@, failed with the following error: %@", myIdentifier, [error localizedDescription]);
+    NSLog(@"%s Line %d: ERROR: The connection, %@, failed with the following error: %@", 
+        __PRETTY_FUNCTION__, __LINE__, myIdentifier, [error localizedDescription]);
     
     [myDelegate request: request didFailWithError: error];
     
